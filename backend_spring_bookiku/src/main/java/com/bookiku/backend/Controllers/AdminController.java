@@ -1,5 +1,15 @@
-package com.bookiku.backend.Controllers;
+package com.bookiku.backend.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
 public class AdminController {
-    
+
+    @GetMapping("/")
+    public String welcomeAdmin(Model model) {
+        model.addAttribute("nom", "Admin");
+        return "welcome-admin";
+    }
 }
