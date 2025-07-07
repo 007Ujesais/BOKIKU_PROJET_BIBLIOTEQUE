@@ -1,3 +1,4 @@
+
 package com.bookiku.backend.model;
 
 import jakarta.persistence.*;
