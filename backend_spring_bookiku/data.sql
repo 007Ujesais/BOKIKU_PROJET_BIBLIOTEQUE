@@ -1,6 +1,6 @@
 -- Table LIVRES : Stocke les informations sur les livres et leurs exemplaires
 CREATE TABLE LIVRES (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     Titre VARCHAR(255) NOT NULL,
     Auteur VARCHAR(255) NOT NULL,
     ISBN VARCHAR(13),
@@ -12,7 +12,7 @@ CREATE TABLE LIVRES (
 
 -- Table ADHERENTS : Stocke les informations sur les adhérents avec leur âge
 CREATE TABLE ADHERENTS (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     NUM_ADHERENT VARCHAR(10) UNIQUE NOT NULL,
     NOM VARCHAR(255) NOT NULL,
     PROFIL ENUM('Etudiant', 'Enseignant', 'Professionnel') NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE ADHERENTS (
 
 -- Table ABONNEMENTS : Gère les abonnements des adhérents
 CREATE TABLE ABONNEMENTS (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     NUM_ADHERENT VARCHAR(10) NOT NULL,
     DATE_DEBUT DATE NOT NULL,
     DATE_FIN DATE NOT NULL,
