@@ -1,4 +1,4 @@
-package com.bookiku.backend.controller;
+package com.bookiku.backend.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

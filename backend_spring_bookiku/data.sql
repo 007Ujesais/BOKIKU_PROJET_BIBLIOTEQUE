@@ -63,6 +63,12 @@ CREATE TABLE RESERVATIONS (
     FOREIGN KEY (Exemplaire) REFERENCES LIVRES(Exemplaire)
 );
 
+CREATE TABLE ADMIN (
+    id SERIAL PRIMARY KEY,
+    nom_utilisateur VARCHAR(50) NOT NULL,
+    mot_de_passe TEXT NOT NULL
+);
+
 -- Insertion des données initiales pour LIVRES
 INSERT INTO LIVRES (id, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disponibilite) VALUES
 (1, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS001', 'Disponible'),
@@ -113,3 +119,6 @@ INSERT INTO EMPRUNTS (id, NUM_ADHERENT, Exemplaire, DATE_EMPRUNT, DATE_RETOUR_PR
 -- Insertion des données initiales pour RESERVATIONS (exemple fictif)
 INSERT INTO RESERVATIONS (id, NUM_ADHERENT, Exemplaire, DATE_RESERVATION) VALUES
 (1, 'ETU002', 'MIS002', '2025-07-07');
+
+INSERT INTO ADMIN (id, nom_utilisateur, mot_de_passe)
+VALUES (1, 'admin1', '$2a$10$exampleHashedPassword12345');
