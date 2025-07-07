@@ -2,7 +2,7 @@ package com.bookiku.backend.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-// Entité RESERVATIONS
+
 @Entity
 @Table(name = "RESERVATIONS")
 public class Reservations {
@@ -22,17 +22,29 @@ public class Reservations {
     @Column(name = "DATE_RESERVATION", nullable = false)
     private LocalDate dateReservation;
 
-    // Constructeurs
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status = Status.EN_ATTENTE;
+
+    // Enum for Reservations status
+    public enum Status {
+        EN_ATTENTE,
+        VALIDER,
+        REFUSER
+    }
+
+    // Constructors
     public Reservations() {}
 
-    public Reservations(int id, Adherents adherent, Livres livre, LocalDate dateReservation) {
+    public Reservations(int id, Adherents adherent, Livres livre, LocalDate dateReservation, Status status) {
         this.id = id;
         this.adherent = adherent;
         this.livre = livre;
         this.dateReservation = dateReservation;
+        this.status = status;
     }
 
-    // Getters et Setters
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -63,5 +75,13 @@ public class Reservations {
 
     public void setDateReservation(LocalDate dateReservation) {
         this.dateReservation = dateReservation;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

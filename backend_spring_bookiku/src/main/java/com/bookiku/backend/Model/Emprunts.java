@@ -3,7 +3,6 @@ package com.bookiku.backend.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
-// Entité EMPRUNTS
 @Entity
 @Table(name = "EMPRUNTS")
 public class Emprunts {
@@ -32,10 +31,22 @@ public class Emprunts {
     @Column(name = "PROLONGATIONS")
     private int prolongations = 0;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status = Status.EN_ATTENTE;
+
+    // Enum for status
+    public enum Status {
+        VALIDER,
+        EN_ATTENTE,
+        RENDU,
+        REFUSER
+    }
+
     // Constructeurs
     public Emprunts() {}
 
-    public Emprunts(int id, Adherents adherent, Livres livre, LocalDate dateEmprunt, LocalDate dateRetourPrevue, LocalDate dateRetourReelle, int prolongations) {
+    public Emprunts(int id, Adherents adherent, Livres livre, LocalDate dateEmprunt, LocalDate dateRetourPrevue, LocalDate dateRetourReelle, int prolongations, Status status) {
         this.id = id;
         this.adherent = adherent;
         this.livre = livre;
@@ -43,6 +54,7 @@ public class Emprunts {
         this.dateRetourPrevue = dateRetourPrevue;
         this.dateRetourReelle = dateRetourReelle;
         this.prolongations = prolongations;
+        this.status = status;
     }
 
     // Getters et Setters
@@ -58,7 +70,7 @@ public class Emprunts {
         return adherent;
     }
 
-    public void setAdherents(Adherents adherent) {
+    public void setAdherent(Adherents adherent) {
         this.adherent = adherent;
     }
 
@@ -101,5 +113,12 @@ public class Emprunts {
     public void setProlongations(int prolongations) {
         this.prolongations = prolongations;
     }
-}
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+}

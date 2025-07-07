@@ -1,15 +1,28 @@
 package com.bookiku.backend.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 
-@Controller
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.bookiku.backend.model.Admin;
+import com.bookiku.backend.repository.AdminRepository;
+
+@RestController
 public class AdminController {
 
-    @GetMapping("/")
-    public String welcomeAdmin(Model model) {
-        model.addAttribute("nom", "Admin");
-        return "welcome-admin";
+    @Autowired
+    private AdminRepository adminRepository;
+
+    @GetMapping("api/admins")
+    public List<Admin> getAllAdmins() {
+        return adminRepository.findAll();
     }
+
+    @PostMapping("api/admins")
+    public Admin createAdmin(@RequestBody Admin admin) {
+        return adminRepository.save(admin);
+    }
+
+
 }
