@@ -2,7 +2,6 @@ package com.bookiku.backend.Model;
 
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 // Entité QUOTAS
 @Entity

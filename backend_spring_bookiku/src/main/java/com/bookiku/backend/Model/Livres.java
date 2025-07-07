@@ -1,7 +1,6 @@
 package com.bookiku.backend.Model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 // Enum pour Disponibilite (LIVRES)
 enum Disponibilite {

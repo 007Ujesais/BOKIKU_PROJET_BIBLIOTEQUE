@@ -1,7 +1,6 @@
 package com.bookiku.backend.Model;
 // Enum pour Profil (ADHERENTS)
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 enum Profil {
     Etudiant, Enseignant, Professionnel
