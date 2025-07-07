@@ -1,23 +1,90 @@
-INSERT INTO LIVRES (ID, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disponibilite) VALUES
+-- Table LIVRES : Stocke les informations sur les livres et leurs exemplaires
+CREATE TABLE LIVRES (
+    id INT PRIMARY KEY,
+    Titre VARCHAR(255) NOT NULL,
+    Auteur VARCHAR(255) NOT NULL,
+    ISBN VARCHAR(13),
+    Categorie VARCHAR(100),
+    Langue VARCHAR(50),
+    Exemplaire VARCHAR(10) UNIQUE,
+    Disponibilite ENUM('Disponible', 'Indisponible') NOT NULL
+);
+
+-- Table ADHERENTS : Stocke les informations sur les adhérents avec leur âge
+CREATE TABLE ADHERENTS (
+    id INT PRIMARY KEY,
+    NUM_ADHERENT VARCHAR(10) UNIQUE NOT NULL,
+    NOM VARCHAR(255) NOT NULL,
+    PROFIL ENUM('Etudiant', 'Enseignant', 'Professionnel') NOT NULL,
+    age INT NOT NULL
+);
+
+-- Table ABONNEMENTS : Gère les abonnements des adhérents
+CREATE TABLE ABONNEMENTS (
+    id INT PRIMARY KEY,
+    NUM_ADHERENT VARCHAR(10) NOT NULL,
+    DATE_DEBUT DATE NOT NULL,
+    DATE_FIN DATE NOT NULL,
+    VALIDITE_ABONNEMENT ENUM('OK', 'KO') NOT NULL,
+    FOREIGN KEY (NUM_ADHERENT) REFERENCES ADHERENTS(NUM_ADHERENT)
+);
+
+-- Table QUOTAS : Définit les limites d'emprunt, réservation et prolongation
+CREATE TABLE QUOTAS (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    NUM_ADHERENT VARCHAR(10) NOT NULL,
+    LIVRES_EMPRUNTES INT NOT NULL,
+    JOURS_PRET INT NOT NULL,
+    RESERVATION_LIVRES INT NOT NULL,
+    PROLONGEMENT_PRET INT NOT NULL,
+    FOREIGN KEY (NUM_ADHERENT) REFERENCES ADHERENTS(NUM_ADHERENT)
+);
+
+-- Table EMPRUNTS : Gère les emprunts actifs
+CREATE TABLE EMPRUNTS (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    NUM_ADHERENT VARCHAR(10) NOT NULL,
+    Exemplaire VARCHAR(10) NOT NULL,
+    DATE_EMPRUNT DATE NOT NULL,
+    DATE_RETOUR_PREVUE DATE NOT NULL,
+    DATE_RETOUR_REELLE DATE,
+    PROLONGATIONS INT DEFAULT 0,
+    FOREIGN KEY (NUM_ADHERENT) REFERENCES ADHERENTS(NUM_ADHERENT),
+    FOREIGN KEY (Exemplaire) REFERENCES LIVRES(Exemplaire)
+);
+
+-- Table RESERVATIONS : Gère les réservations de livres indisponibles
+CREATE TABLE RESERVATIONS (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    NUM_ADHERENT VARCHAR(10) NOT NULL,
+    Exemplaire VARCHAR(10) NOT NULL,
+    DATE_RESERVATION DATE NOT NULL,
+    FOREIGN KEY (NUM_ADHERENT) REFERENCES ADHERENTS(NUM_ADHERENT),
+    FOREIGN KEY (Exemplaire) REFERENCES LIVRES(Exemplaire)
+);
+
+-- Insertion des données initiales pour LIVRES
+INSERT INTO LIVRES (id, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disponibilite) VALUES
 (1, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS001', 'Disponible'),
-(1, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS002', 'Disponible'),
-(1, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS003', 'Disponible'),
-(2, 'L''Étranger', 'Albert Camus', '9782070360022', 'Philosophie', 'Français', 'ETR001', 'Disponible'),
-(2, 'L''Étranger', 'Albert Camus', '9782070360022', 'Philosophie', 'Français', 'ETR002', 'Disponible'),
-(3, 'Harry Potter à l''école des sorciers', 'J.K. Rowling', '9782070643026', 'Jeunesse / Fantastique', 'Français', 'HAR001', 'Disponible');
+(2, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS002', 'Disponible'),
+(3, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS003', 'Disponible'),
+(4, 'L''Étranger', 'Albert Camus', '9782070360022', 'Philosophie', 'Français', 'ETR001', 'Disponible'),
+(5, 'L''Étranger', 'Albert Camus', '9782070360022', 'Philosophie', 'Français', 'ETR002', 'Disponible'),
+(6, 'Harry Potter à l''école des sorciers', 'J.K. Rowling', '9782070643026', 'Jeunesse / Fantastique', 'Français', 'HAR001', 'Disponible');
 
-INSERT INTO ADHERENTS (ID, NUM_ADHERENT, NOM, PROFIL,AGE) VALUES
-(1, 'ETU001', 'Amine Bensaïd', 'Etudiant',18),
-(2, 'ETU002', 'Sarah El Khattabi', 'Etudiant',18),
-(3, 'ETU003', 'Youssef Moujahid', 'Etudiant',18),
-(4, 'ENS001', 'Nadia Benali', 'Enseignant',18),
-(5, 'ENS002', 'Karim Haddadi', 'Enseignant',18),
-(6, 'ENS003', 'Salima Touhami', 'Enseignant',18),
-(7, 'PROF001', 'Rachid El Mansouri', 'Professionnel',18),
-(8, 'PROF002', 'Amina Zerouali', 'Professionnel',18);
+-- Insertion des données initiales pour ADHERENTS (âge fictif ajouté)
+INSERT INTO ADHERENTS (id, NUM_ADHERENT, NOM, PROFIL, age) VALUES
+(1, 'ETU001', 'Amine Bensaïd', 'Etudiant', 20),
+(2, 'ETU002', 'Sarah El Khattabi', 'Etudiant', 19),
+(3, 'ETU003', 'Youssef Moujahid', 'Etudiant', 21),
+(4, 'ENS001', 'Nadia Benali', 'Enseignant', 35),
+(5, 'ENS002', 'Karim Haddadi', 'Enseignant', 40),
+(6, 'ENS003', 'Salima Touhami', 'Enseignant', 38),
+(7, 'PROF001', 'Rachid El Mansouri', 'Professionnel', 45),
+(8, 'PROF002', 'Amina Zerouali', 'Professionnel', 42);
 
-
-INSERT INTO ABONNEMENTS (ID, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNEMENT) VALUES
+-- Insertion des données initiales pour ABONNEMENTS
+INSERT INTO ABONNEMENTS (id, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNEMENT) VALUES
 (1, 'ETU001', '2025-01-01', '2025-12-31', 'OK'),
 (2, 'ETU002', '2025-01-01', '2025-06-30', 'KO'),
 (3, 'ETU003', '2025-03-01', '2025-12-31', 'OK'),
@@ -27,16 +94,22 @@ INSERT INTO ABONNEMENTS (ID, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNE
 (7, 'PROF001', '2025-06-01', '2025-12-31', 'OK'),
 (8, 'PROF002', '2024-09-01', '2025-06-01', 'KO');
 
-INSERT INTO QUOTAS (ID,NUM_ADHERENT, LIVRES_EMPRUNTES, JOURS_PRET, RESERVATION_LIVRES, PROLONGEMENT_PRET) VALUES
-(1,'ETU001', 2, 5, 1, 1),
-(2,'ETU002', 2, 5, 1, 1),
-(3,'ETU003', 2, 5, 1, 1),
-(4,'ENS001', 3, 10, 2, 2),
-(5,'ENS002', 3, 10, 2, 2),
-(6,'ENS003', 3, 10, 2, 2),
-(7,'PROF001', 4, 12, 3, 3),
-(8,'PROF002', 4, 12, 3, 3);
+-- Insertion des données initiales pour QUOTAS
+INSERT INTO QUOTAS (id, NUM_ADHERENT, LIVRES_EMPRUNTES, JOURS_PRET, RESERVATION_LIVRES, PROLONGEMENT_PRET) VALUES
+(1, 'ETU001', 2, 5, 1, 1),
+(2, 'ETU002', 2, 5, 1, 1),
+(3, 'ETU003', 2, 5, 1, 1),
+(4, 'ENS001', 3, 10, 2, 2),
+(5, 'ENS002', 3, 10, 2, 2),
+(6, 'ENS003', 3, 10, 2, 2),
+(7, 'PROF001', 4, 12, 3, 3),
+(8, 'PROF002', 4, 12, 3, 3);
 
-INSERT INTO EMPRUNTS (ID,NUM_ADHERENT, Exemplaire, DATE_EMPRUNT, DATE_RETOUR_PREVUE, DATE_RETOUR_REELLE, PROLONGATIONS) VALUES
-(1,'ETU001', 'MIS001', '2025-07-01', '2025-07-06', NULL, 0),
-(2,'ENS001', 'ETR001', '2025-07-02', '2025-07-12', NULL, 0);
+-- Insertion des données initiales pour EMPRUNTS (exemple fictif)
+INSERT INTO EMPRUNTS (id, NUM_ADHERENT, Exemplaire, DATE_EMPRUNT, DATE_RETOUR_PREVUE, DATE_RETOUR_REELLE, PROLONGATIONS) VALUES
+(1, 'ETU001', 'MIS001', '2025-07-01', '2025-07-06', NULL, 0),
+(2, 'ENS001', 'ETR001', '2025-07-02', '2025-07-12', NULL, 0);
+
+-- Insertion des données initiales pour RESERVATIONS (exemple fictif)
+INSERT INTO RESERVATIONS (id, NUM_ADHERENT, Exemplaire, DATE_RESERVATION) VALUES
+(1, 'ETU002', 'MIS002', '2025-07-07');
