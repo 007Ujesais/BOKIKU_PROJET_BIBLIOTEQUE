@@ -1,4 +1,4 @@
-package com.bookiku.backend.Controllers;
+package com.bookiku.backend.controllers;
 
 public class AdminController {
     

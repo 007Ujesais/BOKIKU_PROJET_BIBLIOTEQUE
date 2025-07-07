@@ -1,4 +1,4 @@
-package com.bookiku.backend.Model;
+package com.bookiku.backend.model;
 // Enum pour Profil (ADHERENTS)
 import jakarta.persistence.*;
 
