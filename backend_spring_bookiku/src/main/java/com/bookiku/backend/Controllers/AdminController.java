@@ -1,28 +1,40 @@
 package com.bookiku.backend.controllers;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.bookiku.backend.model.Admin;
 import com.bookiku.backend.repository.AdminRepository;
 
-@RestController
+@Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminRepository adminRepo;
 
-    @GetMapping("api/admins")
-    public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
+    @GetMapping("/")
+    public String showForm(Model model) {
+        model.addAttribute("admin", new Admin());
+        return "main";
     }
 
-    @PostMapping("api/admins")
-    public Admin createAdmin(@RequestBody Admin admin) {
-        return adminRepository.save(admin);
+    @PostMapping("/submit-form")
+    public String submitForm(@ModelAttribute("admin") Admin admin, Model model, HttpSession session) {
+        Admin dbAdmin = adminRepo.findByNomUtilisateur(admin.getNomUtilisateur());
+
+        if (dbAdmin != null && dbAdmin.getMotDePasse().equals(admin.getMotDePasse())) {
+            session.setAttribute("adminConnecte", dbAdmin);
+            return "redirect:/emprunt/emprunts";
+        } else {
+            model.addAttribute("erreur", "Identifiants invalides");
+            return "main";
+        }
     }
-
-
 }

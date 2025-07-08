@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue</title>
+</head>
+<body>
+    <h1>Bienvenue <span th:text="${nom}">Admin</span> 👋</h1>
+    <p>Ceci est votre espace sécurisé.</p>
+
+    <div th:replace="fragments/liste-emprunt :: liste"></div>
+</body>
+</html>
