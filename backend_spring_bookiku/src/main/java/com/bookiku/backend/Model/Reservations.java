@@ -16,7 +16,7 @@ public class Reservations {
 
     @ManyToOne
     @JoinColumn(name = "Exemplaire", nullable = false)
-    private Livres livre;
+    private String livre;
 
     @Column(name = "DATE_RESERVATION", nullable = false)
     private LocalDate dateReservation;
@@ -35,7 +35,7 @@ public class Reservations {
     // Constructors
     public Reservations() {}
 
-    public Reservations(int id, String adherent, Livres livre, LocalDate dateReservation, Status status) {
+    public Reservations(int id, String adherent, String livre, LocalDate dateReservation, Status status) {
         this.id = id;
         this.adherent = adherent;
         this.livre = livre;
@@ -60,11 +60,11 @@ public class Reservations {
         this.adherent = adherent;
     }
 
-    public Livres getLivre() {
+    public String getLivre() {
         return livre;
     }
 
-    public void setLivre(Livres livre) {
+    public void setLivre(String livre) {
         this.livre = livre;
     }
 

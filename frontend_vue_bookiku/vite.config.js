@@ -19,5 +19,14 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src') // 👈 ceci ajoute l'alias "@"
     }
-  }
+  },
+   server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080', // port du backend Spring Boot
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

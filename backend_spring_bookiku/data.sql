@@ -74,15 +74,9 @@ CREATE TABLE RESERVATIONS (
 );
 
 -- Update initial data for EMPRUNTS
-INSERT INTO EMPRUNTS (id, NUM_ADHERENT, Exemplaire, DATE_EMPRUNT, DATE_RETOUR_PREVUE, DATE_RETOUR_REELLE, PROLONGATIONS, status) VALUES
-(1, 'ETU001', 'MIS001', '2025-07-01', '2025-07-06', NULL, 0, 'valider'),
-(2, 'ENS001', 'ETR001', '2025-07-02', '2025-07-12', NULL, 0, 'valider');
 
--- Update initial data for RESERVATIONS
-INSERT INTO RESERVATIONS (id, NUM_ADHERENT, Exemplaire, DATE_RESERVATION, status) VALUES
-(1, 'ETU002', 'MIS002', '2025-07-07', 'en_attente');
 -- Insertion des données initiales pour LIVRES
-INSERT INTO LIVRES (id, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disponibilite) VALUES
+INSERT INTO public.LIVRES (id, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disponibilite) VALUES
 (1, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS001', 'Disponible'),
 (2, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS002', 'Disponible'),
 (3, 'Les Misérables', 'Victor Hugo', '9782070409189', 'Littérature classique', 'Français', 'MIS003', 'Disponible'),
@@ -91,7 +85,7 @@ INSERT INTO LIVRES (id, Titre, Auteur, ISBN, Categorie, Langue, Exemplaire, Disp
 (6, 'Harry Potter à l''école des sorciers', 'J.K. Rowling', '9782070643026', 'Jeunesse / Fantastique', 'Français', 'HAR001', 'Disponible');
 
 -- Insertion des données initiales pour ADHERENTS (âge fictif ajouté)
-INSERT INTO ADHERENTS (id, NUM_ADHERENT, NOM, PROFIL, age) VALUES
+INSERT INTO public.ADHERENTS (id, NUM_ADHERENT, NOM, PROFIL, age) VALUES
 (1, 'ETU001', 'Amine Bensaïd', 'Etudiant', 20),
 (2, 'ETU002', 'Sarah El Khattabi', 'Etudiant', 19),
 (3, 'ETU003', 'Youssef Moujahid', 'Etudiant', 21),
@@ -101,8 +95,16 @@ INSERT INTO ADHERENTS (id, NUM_ADHERENT, NOM, PROFIL, age) VALUES
 (7, 'PROF001', 'Rachid El Mansouri', 'Professionnel', 45),
 (8, 'PROF002', 'Amina Zerouali', 'Professionnel', 42);
 
+INSERT INTO public.EMPRUNTS (id, NUM_ADHERENT, Exemplaire, DATE_EMPRUNT, DATE_RETOUR_PREVUE, DATE_RETOUR_REELLE, PROLONGATIONS, status) VALUES
+(1, 'ETU001', 'MIS001', '2025-07-01', '2025-07-06', NULL, 0, 'valider'),
+(2, 'ENS001', 'ETR001', '2025-07-02', '2025-07-12', NULL, 0, 'valider');
+
+-- Update initial data for RESERVATIONS
+INSERT INTO public.RESERVATIONS (id, NUM_ADHERENT, Exemplaire, DATE_RESERVATION, status) VALUES
+(1, 'ETU002', 'MIS002', '2025-07-07', 'en_attente');
+
 -- Insertion des données initiales pour ABONNEMENTS
-INSERT INTO ABONNEMENTS (id, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNEMENT) VALUES
+INSERT INTO public.ABONNEMENTS (id, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNEMENT) VALUES
 (1, 'ETU001', '2025-01-01', '2025-12-31', 'OK'),
 (2, 'ETU002', '2025-01-01', '2025-06-30', 'KO'),
 (3, 'ETU003', '2025-03-01', '2025-12-31', 'OK'),
@@ -113,7 +115,7 @@ INSERT INTO ABONNEMENTS (id, NUM_ADHERENT, DATE_DEBUT, DATE_FIN, VALIDITE_ABONNE
 (8, 'PROF002', '2024-09-01', '2025-06-01', 'KO');
 
 -- Insertion des données initiales pour QUOTAS
-INSERT INTO QUOTAS (id, NUM_ADHERENT, LIVRES_EMPRUNTES, JOURS_PRET, RESERVATION_LIVRES, PROLONGEMENT_PRET) VALUES
+INSERT INTO public.QUOTAS (id, NUM_ADHERENT, LIVRES_EMPRUNTES, JOURS_PRET, RESERVATION_LIVRES, PROLONGEMENT_PRET) VALUES
 (1, 'ETU001', 2, 5, 1, 1),
 (2, 'ETU002', 2, 5, 1, 1),
 (3, 'ETU003', 2, 5, 1, 1),
@@ -125,5 +127,5 @@ INSERT INTO QUOTAS (id, NUM_ADHERENT, LIVRES_EMPRUNTES, JOURS_PRET, RESERVATION_
 
 -- Insertion des données initiales pour EMPRUNTS (exemple fictif)
 
-INSERT INTO ADMIN (id, nom_utilisateur, mot_de_passe)
+INSERT INTO public.ADMIN (id, nom_utilisateur, mot_de_passe)
 VALUES (1, 'admin1', '$2a$10$exampleHashedPassword12345');
