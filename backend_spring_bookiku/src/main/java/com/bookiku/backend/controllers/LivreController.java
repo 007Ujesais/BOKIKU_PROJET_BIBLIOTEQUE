@@ -1,5 +1,6 @@
 package com.bookiku.backend.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,14 @@ public class LivreController {
 
     @GetMapping
     public List<Livres> getAllLivres() {
+    try {
         return livreRepository.findAll();
+    } catch (Exception e) {
+        System.err.println("Erreur lors du chargement des livres : " + e.getMessage());
+        e.printStackTrace();
+        return new ArrayList<>();
     }
+}
 
     @PostMapping
     public Livres createLivre(@RequestBody Livres livre) {
