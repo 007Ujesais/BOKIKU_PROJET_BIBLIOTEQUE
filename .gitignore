@@ -1,1 +1,2 @@
-./backend_spring_bookiku/src/main/resources/application.properties
+# Ignore le fichier de configuration sensible
+/backend_spring_bookiku/src/main/resources/application.properties
