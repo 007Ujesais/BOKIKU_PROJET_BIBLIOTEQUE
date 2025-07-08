@@ -12,7 +12,6 @@ public class Quotas {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
     private String adherent;
 

@@ -14,7 +14,6 @@ public class Abonnements {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
     private String adherent;
 

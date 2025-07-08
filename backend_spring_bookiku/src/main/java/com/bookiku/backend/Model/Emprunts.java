@@ -12,7 +12,6 @@ public class Emprunts {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
     private String adherent;
 
