@@ -15,8 +15,7 @@ public class Emprunts {
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
     private String adherent;
 
-  
-    @JoinColumn(name = "Exemplaire", nullable = false)
+    @Column(name = "Exemplaire", nullable = false)
     private String livre;
 
     @Column(name = "DATE_EMPRUNT", nullable = false)

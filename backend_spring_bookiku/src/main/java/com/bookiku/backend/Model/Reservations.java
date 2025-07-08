@@ -14,8 +14,7 @@ public class Reservations {
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
     private String adherent;
 
-    @ManyToOne
-    @JoinColumn(name = "Exemplaire", nullable = false)
+    @Column(name = "Exemplaire", nullable = false)
     private String livre;
 
     @Column(name = "DATE_RESERVATION", nullable = false)
