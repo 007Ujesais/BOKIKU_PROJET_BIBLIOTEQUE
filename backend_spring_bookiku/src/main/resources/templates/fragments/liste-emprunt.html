@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="liste">
+        <h2>Liste des emprunts</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Livre</th>
+                    <th>Date Emprunt</th>
+                    <th>Date Retour Prévue</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="e : ${emprunts}">
+                    <td th:text="${e.adherent.nom}"></td>
+                    <td th:text="${e.adherent.prenom}"></td>
+                    <td th:text="${e.livre.titre}"></td>
+                    <td th:text="${e.dateEmprunt}"></td>
+                    <td th:text="${e.dateRetourPrevue}"></td>
+                    <td th:text="${e.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

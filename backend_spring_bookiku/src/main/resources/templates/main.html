@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin</title>
+</head>
+<body>
+<h2>Connexion Admin</h2>
+
+<p th:if="${erreur}" th:text="${erreur}" style="color:red;"></p>
+
+<form th:action="@{/admin/submit-form}" method="post" th:object="${admin}">
+    <label>Nom d'utilisateur :</label>
+    <input type="text" th:field="*{nomUtilisateur}" required/><br/><br/>
+
+    <label>Mot de passe :</label>
+    <input type="password" th:field="*{motDePasse}" required/><br/><br/>
+
+    <button type="submit">Se connecter</button>
+</form>
+</body>
+</html>
