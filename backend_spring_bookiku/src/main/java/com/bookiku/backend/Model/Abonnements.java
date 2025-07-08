@@ -16,7 +16,7 @@ public class Abonnements {
 
     @ManyToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
-    private Adherents adherent;
+    private String adherent;
 
     @Column(name = "DATE_DEBUT", nullable = false)
     private LocalDate dateDebut;
@@ -31,7 +31,7 @@ public class Abonnements {
     // Constructeurs
     public Abonnements() {}
 
-    public Abonnements(int id, Adherents adherent, LocalDate dateDebut, LocalDate dateFin, ValiditeAbonnement validiteAbonnement) {
+    public Abonnements(int id, String adherent, LocalDate dateDebut, LocalDate dateFin, ValiditeAbonnement validiteAbonnement) {
         this.id = id;
         this.adherent = adherent;
         this.dateDebut = dateDebut;
@@ -48,11 +48,11 @@ public class Abonnements {
         this.id = id;
     }
 
-    public Adherents getAdherent() {
+    public String getAdherent() {
         return adherent;
     }
 
-    public void setAdherent(Adherents adherent) {
+    public void setAdherent(String adherent) {
         this.adherent = adherent;
     }
 

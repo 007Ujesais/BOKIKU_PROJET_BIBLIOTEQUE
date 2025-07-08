@@ -14,7 +14,7 @@ public class Quotas {
 
     @OneToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
-    private Adherents adherent;
+    private String adherent;
 
     @Column(name = "LIVRES_EMPRUNTES", nullable = false)
     private int livresEmpruntes;
@@ -31,7 +31,7 @@ public class Quotas {
     // Constructeurs
     public Quotas() {}
 
-    public Quotas(int id, Adherents adherent, int livresEmpruntes, int joursPret, int reservationLivres, int prolongementPret) {
+    public Quotas(int id, String adherent, int livresEmpruntes, int joursPret, int reservationLivres, int prolongementPret) {
         this.id = id;
         this.adherent = adherent;
         this.livresEmpruntes = livresEmpruntes;
@@ -49,11 +49,11 @@ public class Quotas {
         this.id = id;
     }
 
-    public Adherents getAdherent() {
+    public String getAdherent() {
         return adherent;
     }
 
-    public void setAdherent(Adherents adherent) {
+    public void setAdherent(String adherent) {
         this.adherent = adherent;
     }
 

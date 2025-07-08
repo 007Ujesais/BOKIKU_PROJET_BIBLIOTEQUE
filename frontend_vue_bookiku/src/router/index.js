@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import axios from 'axios'
 
-// Exemples de routes
+// Routes
 const routes = [
   {
     path: '/',
@@ -12,6 +11,16 @@ const routes = [
     path: '/connexion',
     name: 'Connexion',
     component: () => import('../views/Connexion.vue')
+  },
+  {
+    path: '/emprunts',
+    name: 'Emprunts',
+    component: () => import('../views/Emprunts.vue') // ← ta nouvelle page liste des emprunts
+  },
+  {
+    path: '/profil',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue') // ← ta nouvelle page profil
   }
 ]
 

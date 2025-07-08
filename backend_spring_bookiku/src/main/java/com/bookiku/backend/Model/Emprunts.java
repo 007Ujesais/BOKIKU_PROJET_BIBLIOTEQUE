@@ -14,7 +14,7 @@ public class Emprunts {
 
     @ManyToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
-    private Adherents adherent;
+    private String adherent;
 
     @ManyToOne
     @JoinColumn(name = "Exemplaire", nullable = false)
@@ -47,7 +47,7 @@ public class Emprunts {
     // Constructeurs
     public Emprunts() {}
 
-    public Emprunts(int id, Adherents adherent, Livres livre, LocalDate dateEmprunt, LocalDate dateRetourPrevue, LocalDate dateRetourReelle, int prolongations, Status status) {
+    public Emprunts(int id, String adherent, Livres livre, LocalDate dateEmprunt, LocalDate dateRetourPrevue, LocalDate dateRetourReelle, int prolongations, Status status) {
         this.id = id;
         this.adherent = adherent;
         this.livre = livre;
@@ -67,11 +67,11 @@ public class Emprunts {
         this.id = id;
     }
 
-    public Adherents getAdherent() {
+    public String getAdherent() {
         return adherent;
     }
 
-    public void setAdherent(Adherents adherent) {
+    public void setAdherent(String adherent) {
         this.adherent = adherent;
     }
 

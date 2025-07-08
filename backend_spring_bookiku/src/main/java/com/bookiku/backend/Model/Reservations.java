@@ -13,7 +13,7 @@ public class Reservations {
 
     @ManyToOne
     @JoinColumn(name = "NUM_ADHERENT", nullable = false)
-    private Adherents adherent;
+    private String adherent;
 
     @ManyToOne
     @JoinColumn(name = "Exemplaire", nullable = false)
@@ -36,7 +36,7 @@ public class Reservations {
     // Constructors
     public Reservations() {}
 
-    public Reservations(int id, Adherents adherent, Livres livre, LocalDate dateReservation, Status status) {
+    public Reservations(int id, String adherent, Livres livre, LocalDate dateReservation, Status status) {
         this.id = id;
         this.adherent = adherent;
         this.livre = livre;
@@ -53,11 +53,11 @@ public class Reservations {
         this.id = id;
     }
 
-    public Adherents getAdherent() {
+    public String getAdherent() {
         return adherent;
     }
 
-    public void setAdherent(Adherents adherent) {
+    public void setAdherent(String adherent) {
         this.adherent = adherent;
     }
 
